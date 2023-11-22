@@ -1,13 +1,15 @@
 #pragma once
 #include <iostream>
 #include <iomanip>
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 using namespace std;
 
-const double PI = 3.1415926535;
-const double E4 = 1e-4;
-const double E5 = 1e-5;
+namespace precisions {
+	const double E4 = 1e-4;
+	const double E5 = 1e-5;
+}
 
 double f_v19(double x);
 double f_v32(int i, int j, int n);
