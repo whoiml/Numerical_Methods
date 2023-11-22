@@ -8,7 +8,7 @@ double f2(double x1, double x2) { return (pow(x1, 2) + pow(x2, 2) - 1); }
 double f2dx1(double x1, double x2) { return 2 * x1; }
 double f2dx2(double x1, double x2) { return 2 * x2; }
 
-vector<vector<double>> calculateMatrixJ(double x1, double x2, double k) {
+vector<vector<double>> calculateJacobiMatrix(double x1, double x2, double k) {
     return vector<vector<double>> { {(f1(x1 + x1 * k, x2) - f1(x1, x2)) / k / x1, (f1(x1, x2 + x2 * k) - f1(x1, x2)) / k / x2},
         { (f2(x1 + x1 * k, x2) - f2(x1, x2)) / k / x1, (f2(x1, x2 + x2 * k) - f2(x1, x2)) / k / x2 } };
 }
