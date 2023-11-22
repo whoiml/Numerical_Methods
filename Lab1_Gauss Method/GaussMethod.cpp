@@ -197,7 +197,7 @@ double calculateCalcError(vector<double> x1, vector<double> x2) {
     return calc_error;
 }
 
-vector<double> solveLDLT_Factorization(vector<vector<double>> A, vector<double> b) {
+vector<double> solveFactorizationLDLT(vector<vector<double>> A, vector<double> b) {
     int n = A.size();
 
     vector<double> D(n);
