@@ -6,13 +6,17 @@
 
 using namespace std;
 
-const double E1 = 1e-9;
-const double E2 = 1e-9;
-
 namespace errors {
 	const int MATRIX_WITH_PROPORTIONAL_ROWS = 201;
 }
 
+namespace precisions {
+	const double E1 = 1e-9;
+	const double E2 = 1e-9;
+}
+
+/* f1 and f2 are systems of equations that we solve
+	dx1 and dx2 are derivatives of them */
 double f1(double x1, double x2);
 double f1dx1(double x1, double x2);
 double f1dx2(double x1, double x2);
