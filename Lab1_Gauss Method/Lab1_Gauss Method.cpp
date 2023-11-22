@@ -65,7 +65,7 @@ int main()
                                  {2 * (l1 - l2), 2 * l1 + l2 - 3 * l3, 2 * l1 + l2 + 3 * l3 } };
     vector<double> b_LDLT = { -4 * l1 - 2 * l2, -4 * l1 + l2 + 9 * l3, -4 * l1 + l2 - 9 * l3 };
 
-    vector<double> x3 = solveLDLT_Factorization(A_LDLT, b_LDLT);
+    vector<double> x3 = solveFactorizationLDLT(A_LDLT, b_LDLT);
     cout << "LDLT Solution : " << endl << "x3 = " << x3;
     return 0;
 }
