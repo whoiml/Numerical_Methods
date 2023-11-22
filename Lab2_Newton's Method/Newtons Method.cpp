@@ -18,6 +18,10 @@ void solveNewtonsMethod(double x1, double x2, const double E1, const double E2, 
     double delta2 = 1;
 
     cout << "Initial approximation : ( " << x1 << " ; " << x2 << " )\n";
+
+    /* M - Parameter is a relative increment.
+    If it is NULL, then we consider the Jacobi matrix to be an analytical method,
+    otherwise a numerically finite difference method, where it is needed. */
     if (M != NULL) { cout << "Relative increment = " << M << "\n"; }
 
     int iter = 0;
