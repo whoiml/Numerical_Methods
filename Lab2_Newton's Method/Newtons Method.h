@@ -24,5 +24,5 @@ double f2(double x1, double x2);
 double f2dx1(double x1, double x2);
 double f2dx2(double x1, double x2);
 
-vector<vector<double>> calculateMatrixJ(double x1, double x2, double k);
+vector<vector<double>> calculateJacobiMatrix(double x1, double x2, double k);
 void solveNewtonsMethod(double x1, double x2, const double E1, const double E2, const int max_iter, const double M = NULL);
