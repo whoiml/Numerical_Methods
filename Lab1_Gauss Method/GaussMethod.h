@@ -25,4 +25,4 @@ void backwardGaussMethod(vector<vector<double>> A, vector<double> b, vector<doub
 vector<double> calculateResidualVector(vector<vector<double>> A, vector<double> b, vector<double> x);
 double calculateNormaOfRV(vector<double> F);
 double calculateCalcError(vector<double> x1, vector<double> x2);
-vector<double> solveLDLT_Factorization(vector<vector<double>> A, vector<double> b);
+vector<double> solveFactorizationLDLT(vector<vector<double>> A, vector<double> b);
