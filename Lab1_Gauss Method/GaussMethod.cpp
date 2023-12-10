@@ -1,7 +1,8 @@
 #include "GaussMethod.h"
 
-vector<double> operator / (const vector<double>& v1, const vector<double>& v2) {
-    vector<double> result(v2.size());
+template<typename T>
+vector<T> operator / (vector<T>& v1, vector<T>& v2) {
+    vector<T> result(v2.size());
 
     for (int i = 0; i < v2.size(); i++) {
         result[i] = v1[i] / v2[i];
@@ -9,8 +10,9 @@ vector<double> operator / (const vector<double>& v1, const vector<double>& v2) {
     return result;
 }
 
-vector<double> operator * (const vector<vector<double>>& m1, const vector<double>& v2) {
-    vector<double> result(v2.size());
+template<typename T>
+vector<T> operator * (vector<vector<T>>& m1, vector<T>& v2) {
+    vector<T> result(v2.size());
 
     for (int i = 0; i < result.size(); i++) {
         result[i] = 0;
@@ -21,7 +23,8 @@ vector<double> operator * (const vector<vector<double>>& m1, const vector<double
     return result;
 }
 
-ostream& operator << (ostream& os, const vector<vector<double>>& A) {
+template<typename T>
+ostream& operator << (ostream& os, vector<vector<T>>& A) {
     int n = A.size();
 
     cout << endl;
@@ -34,7 +37,8 @@ ostream& operator << (ostream& os, const vector<vector<double>>& A) {
     return os;
 }
 
-ostream& operator << (ostream& os, const vector<double>& A) {
+template<typename T>
+ostream& operator << (ostream& os, vector<T>& A) {
     int n = A.size();
 
     os << "(" << A[0];
@@ -45,7 +49,8 @@ ostream& operator << (ostream& os, const vector<double>& A) {
     return os;
 }
 
-istream& operator >> (istream& is, vector<vector<double>>& A) {
+template<typename T>
+istream& operator >> (istream& is, vector<vector<T>>& A) {
     int n = A.size();
 
     for (int i = 0; i < n; i++) {
@@ -56,7 +61,8 @@ istream& operator >> (istream& is, vector<vector<double>>& A) {
     return is;
 }
 
-istream& operator >> (istream& is, vector<double>& A) {
+template<typename T>
+istream& operator >> (istream& is, vector<T>& A) {
     int n = A.size();
 
     for (int i = 0; i < n; i++) {
@@ -65,9 +71,9 @@ istream& operator >> (istream& is, vector<double>& A) {
     return is;
 }
 
-bool isVectorWithSameCoordinates(vector<double> v)
-{
-    double ram = v[0];
+template<typename T>
+bool isVectorWithSameCoordinates(vector<T> v) {
+    T ram = v[0];
     for (int i = 1; i < v.size(); i++) {
         if (ram == v[i])
             continue;
@@ -77,10 +83,11 @@ bool isVectorWithSameCoordinates(vector<double> v)
     return true;
 }
 
-bool isMatrixWithProportionalityRows(vector<vector<double>> A, vector<double> b) {
+template<typename T>
+bool isMatrixWithProportionalityRows(vector<vector<T>> A, vector<T> b) {
     int n = A.size();
 
-    vector<vector<double>> A_b(n, vector<double>(n + 1, 0));
+    vector<vector<T>> A_b(n, vector<T>(n + 1, 0));
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n + 1; j++) {
             if (j == n)
@@ -100,7 +107,8 @@ bool isMatrixWithProportionalityRows(vector<vector<double>> A, vector<double> b)
     return false;
 }
 
-vector<double> solveGaussMethod(vector<vector<double>> A, vector<double> b) {
+template<typename T>
+vector<T> solveGaussMethod(vector<vector<T>> A, vector<T> b) {
     int n = A.size();
 
     if (isMatrixWithProportionalityRows(A, b)) {
@@ -109,12 +117,13 @@ vector<double> solveGaussMethod(vector<vector<double>> A, vector<double> b) {
 
     forwardGaussMethod(A, b);
 
-    vector<double> x(n);
+    vector<T> x(n);
     backwardGaussMethod(A, b, x);
     return x; 
 }
 
-void forwardGaussMethod(vector<vector<double>>& A, vector<double>& b) {
+template<typename T>
+void forwardGaussMethod(vector<vector<T>>& A, vector<T>& b) {
     int n = A.size();
 
     for (int i = 0; i < n; i++) {
@@ -128,14 +137,14 @@ void forwardGaussMethod(vector<vector<double>>& A, vector<double>& b) {
         swap(A[i], A[k]);
         swap(b[i], b[k]);
 
-        double div = A[i][i];
+        T div = A[i][i];
         for (int j = i; j < n; j++) {
             A[i][j] /= div;
         }
         b[i] /= div;
 
         for (int j = i + 1; j < n; j++) {
-            double mult = A[j][i];
+            T mult = A[j][i];
             for (int k = i; k < n; k++) {
                 A[j][k] -= mult * A[i][k];
             }
@@ -144,7 +153,8 @@ void forwardGaussMethod(vector<vector<double>>& A, vector<double>& b) {
     }
 }
 
-void backwardGaussMethod(vector<vector<double>> A, vector<double> b, vector<double>& x) {
+template<typename T>
+void backwardGaussMethod(vector<vector<T>> A, vector<T> b, vector<T>& x) {
     int n = A.size();
 
     for (int i = n - 1; i >= 0; i--) {
@@ -155,11 +165,12 @@ void backwardGaussMethod(vector<vector<double>> A, vector<double> b, vector<doub
     }
 }
 
-vector<double> calculateResidualVector(vector<vector<double>> A, vector<double> b, vector<double> x) {
+template<typename T>
+vector<T> calculateResidualVector(vector<vector<T>> A, vector<T> b, vector<T> x) {
     int n = A.size();
     double Ax = 0;
 
-    vector<double> F(n);
+    vector<T> F(n);
     for (int i = 0; i < n; i++) {
         Ax = 0;
         for (int j = 0; j < n; j++) {
@@ -170,9 +181,10 @@ vector<double> calculateResidualVector(vector<vector<double>> A, vector<double> 
     return F;
 }
 
-double calculateNormaOfRV(vector<double> F) {
+template<typename T>
+T calculateNormaOfRV(vector<T> F) {
     int n = F.size();
-    double norma = 0;
+    T norma = 0;
 
     for (int i = 0; i < n; i++) {
         norma += pow(F[i], 2);
@@ -181,11 +193,12 @@ double calculateNormaOfRV(vector<double> F) {
     return norma;
 }
 
-double calculateCalcError(vector<double> x1, vector<double> x2) {
+template<typename T>
+T calculateCalcError(vector<T> x1, vector<T> x2) {
     int n = x1.size();
-    double calc_error = 0;
+    T calc_error = 0;
 
-    double max1 = 0, max2 = 0;
+    T max1 = 0, max2 = 0;
     for (int i = 0; i < n; i++) {
         if (x2[i] - x1[i] > max1)
             max1 = x2[i] - x1[i];
@@ -197,12 +210,13 @@ double calculateCalcError(vector<double> x1, vector<double> x2) {
     return calc_error;
 }
 
-vector<double> solveFactorizationLDLT(vector<vector<double>> A, vector<double> b) {
+template<typename T>
+vector<T> solveFactorizationLDLT(vector<vector<T>> A, vector<T> b) {
     int n = A.size();
 
-    vector<double> D(n);
-    vector<vector<double>> L(n, vector<double>(n, 0.0));
-    vector<vector<double>> LT(n, vector<double>(n, 0.0));
+    vector<T> D(n);
+    vector<vector<T>> L(n, vector<T>(n, 0.0));
+    vector<vector<T>> LT(n, vector<T>(n, 0.0));
 
     // Units on the main diagonal
 	for (int i = 0; i < 3; ++i) {
@@ -213,7 +227,7 @@ vector<double> solveFactorizationLDLT(vector<vector<double>> A, vector<double> b
     // Iteration cycle by columns
     for (int j = 0; j < n; j++) {
         // The amount we take away
-        double sum = 0.0;
+        T sum = 0.0;
         for (int i = 0; i < j; i++) {
             sum += D[i] * pow(L[j][i], 2);
         }
@@ -235,10 +249,10 @@ vector<double> solveFactorizationLDLT(vector<vector<double>> A, vector<double> b
     }
 
 	// Ly = B ; Dz = y
-    vector<double> y(n);
-    vector<double> z(n);
+    vector<T> y(n);
+    vector<T> z(n);
     for (int i = 0; i < n; i++) {
-        double sum = 0.0;
+        T sum = 0.0;
         for (int j = 0; j < i; j++) {
             sum += L[i][j] * y[j];
         }
@@ -248,9 +262,9 @@ vector<double> solveFactorizationLDLT(vector<vector<double>> A, vector<double> b
     }
 
 	// LTx = z
-    vector<double> x(n);
+    vector<T> x(n);
     for (int i = n - 1; i >= 0; i--) {
-        double sum = 0.0;
+        T sum = 0.0;
         for (int j = n - 1; j > i; j--) {
             sum += LT[i][j] * x[j];
         }
