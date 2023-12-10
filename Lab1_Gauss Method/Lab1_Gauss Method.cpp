@@ -1,4 +1,4 @@
-﻿#include "GaussMethod.h"
+﻿#include "GaussMethod.cpp"
 
 int main()
 {
