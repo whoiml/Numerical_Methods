@@ -8,21 +8,37 @@ namespace errors {
 	const int MATRIX_WITH_PROPORTIONAL_ROWS = 201;
 }
 
-vector<double> operator / (const vector<double>& v1, const vector<double>& v2);
-vector<double> operator * (const vector<vector<double>>& m1, const vector<double>& v2);
+template<typename T>
+vector<T> operator / (vector<T>& v1, vector<T>& v2);
+template<typename T>
+vector<T> operator * (vector<vector<T>>& m1, vector<T>& v2);
 
-ostream& operator << (ostream& os, const vector<vector<double>>& A);
-ostream& operator << (ostream& os, const vector<double>& A);
-istream& operator >> (istream& is, vector<vector<double>>& A);
-istream& operator >> (istream& is, vector<double>& A);
+template<typename T>
+ostream& operator << (ostream& os, vector<vector<T>>& A);
+template<typename T>
+ostream& operator << (ostream& os, vector<T>& A);
+template<typename T>
+istream& operator >> (istream& is, vector<vector<T>>& A);
+template<typename T>
+istream& operator >> (istream& is, vector<T>& A);
 
-bool isVectorWithSameCoordinates(vector<double> v);
-bool isMatrixWithProportionalityRows(vector<vector<double>> A, vector<double> b);
+template<typename T>
+bool isVectorWithSameCoordinates(vector<T> v);
+template<typename T>
+bool isMatrixWithProportionalityRows(vector<vector<T>> A, vector<T> b);
 
-vector<double> solveGaussMethod(vector<vector<double>> A, vector<double> b);
-void forwardGaussMethod(vector<vector<double>>& A, vector<double>& b);
-void backwardGaussMethod(vector<vector<double>> A, vector<double> b, vector<double>& x);
-vector<double> calculateResidualVector(vector<vector<double>> A, vector<double> b, vector<double> x);
-double calculateNormaOfRV(vector<double> F);
-double calculateCalcError(vector<double> x1, vector<double> x2);
-vector<double> solveFactorizationLDLT(vector<vector<double>> A, vector<double> b);
+template<typename T>
+vector<T> solveGaussMethod(vector<vector<T>> A, vector<T> b);
+template<typename T>
+void forwardGaussMethod(vector<vector<T>>& A, vector<T>& b);
+template<typename T>
+void backwardGaussMethod(vector<vector<T>> A, vector<T> b, vector<T>& x);
+template<typename T>
+vector<T> calculateResidualVector(vector<vector<T>> A, vector<T> b, vector<T> x);
+template<typename T>
+T calculateNormaOfRV(vector<T> F);
+template<typename T>
+T calculateCalcError(vector<T> x1, vector<T> x2);
+
+template<typename T>
+vector<T> solveFactorizationLDLT(vector<vector<T>> A, vector<T> b);
